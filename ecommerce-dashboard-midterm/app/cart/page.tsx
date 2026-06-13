@@ -11,16 +11,9 @@ export default function CartPage() {
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-10">
       <section className="space-y-3">
-        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-          Shared cart
-        </p>
         <h1 className="text-4xl font-semibold uppercase tracking-[0.15em] text-slate-800">
           Cart
         </h1>
-        <p className="max-w-2xl text-sm leading-6 text-slate-600">
-          Items added from the clothing catalog appear here immediately and are
-          saved in the browser.
-        </p>
       </section>
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
