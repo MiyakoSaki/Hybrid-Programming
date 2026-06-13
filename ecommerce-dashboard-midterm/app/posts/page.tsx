@@ -33,19 +33,12 @@ export default async function PostsPage() {
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-10">
       <section className="space-y-3">
-        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-          Incremental static regeneration
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight text-slate-900">
-          Posts feed
+        <h1 className="text-4xl font-semibold uppercase tracking-[0.15em] text-slate-800">
+          Posts Feed
         </h1>
-        <p className="max-w-2xl text-sm leading-6 text-slate-600">
-          This feed is cached and automatically regenerated in the background on
-          a timed interval to balance freshness and speed.
-        </p>
       </section>
 
-      <section className="grid gap-6 lg:grid-cols-2">
+      <section className="grid gap-6">
         {posts.map((post) => (
           <article
             key={post.id}

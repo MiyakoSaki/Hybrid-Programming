@@ -61,16 +61,9 @@ export default async function DashboardPage() {
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-10">
       <section className="flex flex-col gap-3">
-        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-          Server-side rendered
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight text-slate-900">
+        <h1 className="text-4xl font-semibold uppercase tracking-[0.15em] text-slate-800">
           Dashboard
         </h1>
-        <p className="max-w-2xl text-sm leading-6 text-slate-600">
-          This page fetches users and carts at request time with concurrent
-          requests, so the content is always fresh when the route is visited.
-        </p>
       </section>
 
       <section className="grid gap-6 md:grid-cols-2">

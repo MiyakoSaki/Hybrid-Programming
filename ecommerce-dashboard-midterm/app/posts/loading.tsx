@@ -7,7 +7,7 @@ export default function Loading() {
         <div className="h-4 w-full max-w-xl animate-pulse rounded-full bg-slate-200" />
       </div>
 
-      <section className="grid gap-6 lg:grid-cols-2">
+      <section className="grid gap-6">
         {Array.from({ length: 4 }).map((_, index) => (
           <div
             key={index}

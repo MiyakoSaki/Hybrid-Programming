@@ -1,54 +1,18 @@
 import Link from "next/link";
 
+import { CLOTHING_PRODUCTS } from "./data";
+
 export const dynamic = "force-static";
 
-const CLOTHING_CATEGORIES = ["mens-shirts", "mens-shoes"] as const;
-
-type Product = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-};
-
-type ProductsResponse = {
-  products: Product[];
-};
-
-async function getProducts() {
-  const res = await fetch("https://dummyjson.com/products");
-
-  if (!res.ok) {
-    throw new Error("Failed to load products.");
-  }
-
-  return (await res.json()) as ProductsResponse;
-}
-
 export default async function ProductsPage() {
-  const { products } = await getProducts();
-  const clothingProducts = products.filter((product) =>
-    CLOTHING_CATEGORIES.includes(
-      product.category as (typeof CLOTHING_CATEGORIES)[number],
-    ),
-  );
+  const clothingProducts = CLOTHING_PRODUCTS;
 
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-10">
       <section className="space-y-3">
-        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-          Static site generation
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight text-slate-900">
-          Clothing collection
+        <h1 className="text-4xl font-semibold uppercase tracking-[0.15em] text-slate-800">
+          Products collection
         </h1>
-        <p className="max-w-2xl text-sm leading-6 text-slate-600">
-          This fashion storefront is prebuilt at build time and links into
-          statically generated clothing detail pages only.
-        </p>
       </section>
 
       <section className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">

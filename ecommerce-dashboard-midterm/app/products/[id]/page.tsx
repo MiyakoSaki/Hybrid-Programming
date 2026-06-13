@@ -2,64 +2,21 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { AddToCartButton } from "./add-to-cart-button";
+import { CLOTHING_PRODUCTS, getClothingProduct } from "../data";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
 
-const CLOTHING_CATEGORIES = ["mens-shirts", "mens-shoes"] as const;
-
-type Product = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: string[];
-};
-
-type ProductsResponse = {
-  products: Pick<Product, "id">[];
-};
-
-type ClothingProductResponse = Product;
-
 export async function generateStaticParams() {
-  const res = await fetch("https://dummyjson.com/products");
-
-  if (!res.ok) {
-    throw new Error("Failed to load product ids.");
-  }
-
-  const data = (await res.json()) as ProductsResponse;
-
-  return data.products.map((product) => ({
+  return CLOTHING_PRODUCTS.map((product) => ({
     id: String(product.id),
   }));
 }
 
 async function getProduct(id: string) {
-  const res = await fetch(`https://dummyjson.com/products/${id}`);
+  const product = getClothingProduct(Number(id));
 
-  if (res.status === 404) {
-    notFound();
-  }
-
-  if (!res.ok) {
-    throw new Error("Failed to load product details.");
-  }
-
-  const product = (await res.json()) as ClothingProductResponse;
-
-  if (
-    !CLOTHING_CATEGORIES.includes(
-      product.category as (typeof CLOTHING_CATEGORIES)[number],
-    )
-  ) {
+  if (!product) {
     notFound();
   }
 
