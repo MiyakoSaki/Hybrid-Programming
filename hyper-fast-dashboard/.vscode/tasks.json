@@ -1,0 +1,76 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "lint-dashboard",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"lint"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "test"
+		},
+		{
+			"label": "lint-dashboard-cmd",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"npx",
+				"eslint",
+				"app/dashboard/page.tsx",
+				"app/dashboard/ProfileForm.tsx",
+				"app/dashboard/RevenueCard.tsx"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "test"
+		},
+		{
+			"label": "lint-dashboard-cmd",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"npx",
+				"eslint",
+				"app/dashboard/page.tsx",
+				"app/dashboard/ProfileForm.tsx",
+				"app/dashboard/RevenueCard.tsx",
+				"next.config.ts"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "test"
+		},
+		{
+			"label": "lint-dashboard-cmd-2",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"npx",
+				"eslint",
+				"app/dashboard/page.tsx",
+				"app/dashboard/ProfileForm.tsx",
+				"app/dashboard/QuickAnalyticsCard.tsx",
+				"app/dashboard/RevenueCard.tsx",
+				"next.config.ts"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "test"
+		}
+	]
+}
