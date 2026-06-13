@@ -1,18 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export function AddToCartButton({ productTitle }: { productTitle: string }) {
-  const [added, setAdded] = useState(false);
+import { useCart } from "../../cart/cart-context";
+import type { ClothingProduct } from "../data";
+
+export function AddToCartButton({
+  product,
+  label = "Add to cart",
+}: {
+  product: Pick<
+    ClothingProduct,
+    "id" | "title" | "price" | "thumbnail" | "category"
+  >;
+  label?: string;
+}) {
+  const { addItem } = useCart();
+  const [recentlyAdded, setRecentlyAdded] = useState(false);
+
+  function handleAdd() {
+    addItem(product);
+    setRecentlyAdded(true);
+  }
+
+  useEffect(() => {
+    if (!recentlyAdded) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => setRecentlyAdded(false), 1200);
+
+    return () => window.clearTimeout(timer);
+  }, [recentlyAdded]);
 
   return (
     <button
       type="button"
-      onClick={() => setAdded(true)}
-      className="rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700 disabled:cursor-default disabled:bg-emerald-600"
-      disabled={added}
+      onClick={handleAdd}
+      className="rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700"
     >
-      {added ? `Added ${productTitle}` : "Add to wardrobe"}
+      {recentlyAdded ? `Added ${product.title}` : label}
     </button>
   );
 }

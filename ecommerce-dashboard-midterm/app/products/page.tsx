@@ -1,11 +1,12 @@
 import Link from "next/link";
 
-import { CLOTHING_PRODUCTS } from "./data";
+import { AddToCartButton } from "./[id]/add-to-cart-button";
+import { getClothingProducts } from "./data";
 
 export const dynamic = "force-static";
 
 export default async function ProductsPage() {
-  const clothingProducts = CLOTHING_PRODUCTS;
+  const clothingProducts = await getClothingProducts();
 
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-10">
@@ -21,7 +22,7 @@ export default async function ProductsPage() {
             key={product.id}
             className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
           >
-            <div className="aspect-[4/3] bg-slate-100">
+            <div className="aspect-4/3 bg-slate-100">
               <img
                 src={product.thumbnail}
                 alt={product.title}
@@ -37,6 +38,24 @@ export default async function ProductsPage() {
                   {product.title}
                 </h2>
               </div>
+              <div className="grid grid-cols-2 gap-2">
+                <AddToCartButton
+                  label="Quick add"
+                  product={{
+                    id: product.id,
+                    title: product.title,
+                    price: product.price,
+                    thumbnail: product.thumbnail,
+                    category: product.category,
+                  }}
+                />
+                <Link
+                  href={`/products/${product.id}`}
+                  className="rounded-full border border-slate-300 px-4 py-3 text-center text-sm font-medium text-slate-700 transition hover:border-slate-400"
+                >
+                  View details
+                </Link>
+              </div>
               <p className="line-clamp-3 text-sm leading-6 text-slate-600">
                 {product.description}
               </p>
@@ -44,12 +63,6 @@ export default async function ProductsPage() {
                 <p className="text-lg font-semibold text-slate-900">
                   ${product.price}
                 </p>
-                <Link
-                  href={`/products/${product.id}`}
-                  className="rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-700"
-                >
-                  View details
-                </Link>
               </div>
             </div>
           </article>

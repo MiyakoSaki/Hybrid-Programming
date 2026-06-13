@@ -2,19 +2,21 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { AddToCartButton } from "./add-to-cart-button";
-import { CLOTHING_PRODUCTS, getClothingProduct } from "../data";
+import { getClothingProduct, getClothingProducts } from "../data";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  return CLOTHING_PRODUCTS.map((product) => ({
+  const clothingProducts = await getClothingProducts();
+
+  return clothingProducts.map((product) => ({
     id: String(product.id),
   }));
 }
 
 async function getProduct(id: string) {
-  const product = getClothingProduct(Number(id));
+  const product = await getClothingProduct(Number(id));
 
   if (!product) {
     notFound();
@@ -95,7 +97,15 @@ export default async function ProductPage({
             </div>
           </dl>
 
-          <AddToCartButton productTitle={product.title} />
+          <AddToCartButton
+            product={{
+              id: product.id,
+              title: product.title,
+              price: product.price,
+              thumbnail: product.thumbnail,
+              category: product.category,
+            }}
+          />
         </article>
       </section>
     </main>
